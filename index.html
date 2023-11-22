@@ -1,14 +1,49 @@
 <!DOCTYPE html>
-<script src="wasm_exec.js"></script>
-<script>
-if (!WebAssembly.instantiateStreaming) {
-    WebAssembly.instantiateStreaming = async (resp, importObject) => {
-        const source = await (await resp).arrayBuffer();
-        return await WebAssembly.instantiate(source, importObject);
-    };
-}
-const go = new Go();
-WebAssembly.instantiateStreaming(fetch("cnc_game.wasm"), go.importObject).then(result => {
-    go.run(result.instance);
-});
-</script>
+
+<head>
+    <link rel="manifest" href="manifest.json" />
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: url('data/assets/menubg.png') no-repeat center center fixed black;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            color: white;
+            text-shadow: 3px 3px 3px black;
+            font-size: 2vw;
+
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+
+            padding-bottom: 20px;
+        }
+    </style>
+    <script src="wasm_exec.js"></script>
+    <script>
+        if (!WebAssembly.instantiateStreaming) {
+            WebAssembly.instantiateStreaming = async (resp, importObject) => {
+                const source = await (await resp).arrayBuffer();
+                return await WebAssembly.instantiate(source, importObject);
+            };
+        }
+        const go = new Go();
+        WebAssembly.instantiateStreaming(fetch("cnc_game.wasm"), go.importObject).then(result => {
+            go.run(result.instance);
+        });
+    </script>
+</head>
+
+<body>
+    Loading..
+</body>
+
+</html>
