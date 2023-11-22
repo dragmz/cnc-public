@@ -2,6 +2,18 @@
 
 <head>
     <link rel="manifest" href="manifest.json" />
+    <style>
+        body.launching {
+            background: url('data/assets/menubg.png') no-repeat center center fixed black;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            color: white;
+            text-shadow: 3px 3px 3px black;
+            font-size: 2vw;
+        }
+    </style>
     <script src="wasm_exec.js"></script>
     <script>
         if (!WebAssembly.instantiateStreaming) {
@@ -15,10 +27,25 @@
             go.run(result.instance);
         });
     </script>
+    <script>
+        function onLaunched() {
+            document.body.classList.remove("launching");
+            document.getElementById("loading").remove();
+        }
+        function playMusic() {
+            document.querySelector("audio").play();
+        }
+        function stopMusic() {
+            document.querySelector("audio").pause();
+        }
+    </script>
 </head>
 
-<body>
-    Loading..
+<body class="launching">
+    <audio loop>
+        <source src="data/assets/music.ogg" type="audio/ogg">
+    </audio>
+    <div id="loading">Loading..</div>
 </body>
 
 </html>
