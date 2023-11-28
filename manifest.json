@@ -1,4 +1,11 @@
 {
+    "name": "CnC: Claim & Conquer",
     "display": "fullscreen",
-    "orientation": "landscape"
+    "orientation": "landscape",
+    "icons": [
+        {
+            "src": "icon.png",
+            "sizes": "any"
+        }
+    ]
 }
